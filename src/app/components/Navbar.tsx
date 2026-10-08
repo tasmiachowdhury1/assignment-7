@@ -80,8 +80,8 @@ export default function Navbar() {
                         {menuOpen ? "✕" : "☰"}
                     </button>
                 </div>
-                <div className="border-t-1 border-gray-300">
-                    <nav className="hidden items-center gap-2 overflow-x-auto pb-3 sm:flex">
+                <div className="border-t border-gray-300">
+                    <nav className="hidden items-center gap-2 pb-3 sm:flex">
                         {categories.map((category) => (
                             <Link
                                 key={category.id}

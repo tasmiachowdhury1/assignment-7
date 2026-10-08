@@ -13,8 +13,8 @@
   --primary-lighter: #e7f3eb;
   --accent: #f3a318;
   --accent-light: #fdf3d8;
-  --dangerous: #dc2626;
-  --dangerous-light: #fee2e2;
+  --price-hike: #dc2626;
+  --price-hike-light: #fee2e2;
   --border: #e5e7eb;
   --muted: #6b7280;
   --white: #ffffff;
@@ -39,4 +39,14 @@ body {
   color: var(--foreground);
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
