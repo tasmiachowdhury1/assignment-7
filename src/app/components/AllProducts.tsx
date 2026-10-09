@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
 
@@ -16,6 +17,7 @@ type Product = {
         pct: number;
     };
 };
+
 
 export default function AllProducts() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -72,10 +74,7 @@ export default function AllProducts() {
             ) : (
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {products.map((product) => (
-                        <article
-                            key={product.id}
-                            className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer"
-                        >
+                        <Link key={product.id} href={`/products/${product.id}`} className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer">
                             <div className="flex items-center gap-3">
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
                                     {product.image}
@@ -122,7 +121,7 @@ export default function AllProducts() {
                                         </span>
                                     )}
                             </div>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             )}

@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import React from "react"
 import { useEffect, useMemo, useState } from "react"
 
@@ -205,10 +206,8 @@ export default function ProductByCategory({ slug }: Props) {
                         const change = getPriceChange(product)
 
                         return (
-                            <article
-                                key={product.id}
-                                className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer"
-                            >
+                            <Link key={product.id} href={`/products/${product.id}`} className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer">
+
                                 <div className="flex items-center gap-3">
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
                                         {product.image}
@@ -253,7 +252,8 @@ export default function ProductByCategory({ slug }: Props) {
                                             </span>
                                         )}
                                 </div>
-                            </article>
+
+                            </Link>
                         )
                     })}
                 </div>

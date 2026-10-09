@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 import React from 'react';
 import { useEffect, useState } from "react";
 
@@ -65,10 +66,7 @@ export default function PriceIncreased() {
             ) : (
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {topProducts.map((product) => (
-                        <article
-                            key={product.id}
-                            className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer"
-                        >
+                        <Link key={product.id} href={`/products/${product.id}`} className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer">
                             <div className="flex items-center gap-3">
                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
                                     {product.image}
@@ -101,7 +99,7 @@ export default function PriceIncreased() {
                                     {Number(product.change.pct).toLocaleString("bn-BD")}%
                                 </span>
                             </div>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             )}
