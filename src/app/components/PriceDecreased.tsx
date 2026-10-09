@@ -13,7 +13,7 @@ type Product = {
         pct: number
     }
 }
-export default function PriceIncreased() {
+export default function PriceDecreased() {
     const [products, setProducts] = useState<Product[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -43,9 +43,9 @@ export default function PriceIncreased() {
     }, [])
 
     const topProducts = [...products]
-        .filter((product) => product.change?.dir === "up" && Number(product.change.pct))
+        .filter((product) => product.change?.dir === "down" && Number(product.change.pct))
         .sort(
-            (a, b) => Number(b.change.pct) - Number(a.change.pct)
+            (a, b) => Number(a.change.pct) - Number(b.change.pct)
         ).slice(0, 6)
 
     if (loading) {
@@ -54,8 +54,8 @@ export default function PriceIncreased() {
 
     return (
         <section className="mt-10 mx-auto max-w-[1500px]">
-            <h2 className="mb-4 text-xl font-bold text-(--price-hike)">
-                ▲ <span className='text-black'>আজ দাম বেড়েছে</span>
+            <h2 className="mb-4 text-xl font-bold text-(--primary-light)">
+                ▼ <span className='text-black'>আজ দাম কমেছে</span>
             </h2>
 
             {topProducts.length === 0 ? (
@@ -96,7 +96,7 @@ export default function PriceIncreased() {
                                     </p>
                                 </div>
 
-                                <span className="shrink-0 rounded-full bg-gray-200 px-2 py-1 text-sm font-semibold text-(--price-hike)">
+                                <span className="shrink-0 rounded-full bg-gray-200 px-2 py-1 text-sm font-semibold text-(--primary-light)">
                                     ▲{" "}
                                     {Number(product.change.pct).toLocaleString("bn-BD")}%
                                 </span>
