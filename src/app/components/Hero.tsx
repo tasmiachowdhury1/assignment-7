@@ -30,7 +30,7 @@ const Hero = () => {
                         চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
                     </p>
                     <Link href="#products"
-                        className="mt-7 inline-block rounded-2xl bg-(--primary-light) px-6 py-3 text-lg font-semibold  text-white hover:bg-(--primary)">সব পণ্য দেখুন
+                        className="mt-7 inline-block rounded-2xl bg-(--primary-light) px-6 py-3 text-lg font-semibold  text-white hover:bg-(--primary) shadow-md shadow-green-800">সব পণ্য দেখুন
                     </Link>
                 </div>
                 <div className="relative">
