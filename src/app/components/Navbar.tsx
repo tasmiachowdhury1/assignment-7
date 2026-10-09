@@ -42,7 +42,7 @@ export default function Navbar() {
 
     return (
         <header className="border-b border-(--border) bg-white">
-            <div className="mx-auto max-w-6xl px-4">
+            <div className="mx-auto max-w-[1500px] px-4">
                 <div className="flex min-h-20 items-center justify-between gap-4">
                     <Link href="/" className="flex items-center gap-3">
                         <Image src="/logo-icon.png" alt="Bazar Dor" width={20}
