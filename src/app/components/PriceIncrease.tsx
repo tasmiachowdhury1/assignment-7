@@ -49,7 +49,7 @@ export default function PriceIncreased() {
         ).slice(0, 6)
 
     if (loading) {
-        return <p className="py-8">পণ্য লোড হচ্ছে...</p>
+        return <p className="mt-10">পণ্য লোড হচ্ছে...</p>
     }
 
     return (
@@ -70,7 +70,7 @@ export default function PriceIncreased() {
                             className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer"
                         >
                             <div className="flex items-center gap-3">
-                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-200 text-2xl">
+                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
                                     {product.image}
                                 </div>
                                 <div className="min-w-0 flex-1">
@@ -96,7 +96,7 @@ export default function PriceIncreased() {
                                     </p>
                                 </div>
 
-                                <span className="shrink-0 rounded-full bg-gray-200 px-2 py-1 text-sm font-semibold text-(--price-hike)">
+                                <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold text-(--price-hike)">
                                     ▲{" "}
                                     {Number(product.change.pct).toLocaleString("bn-BD")}%
                                 </span>
