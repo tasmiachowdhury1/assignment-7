@@ -27,7 +27,7 @@ export default function Navbar() {
         async function fetchCategories() {
             try {
                 const response = await fetch(
-                    "https://api.api-store.workers.dev/api/bazardor/categories")
+                    "https://api.abcz.workers.dev/api/bazardor/categories")
                 if (!response.ok) {
                     throw new Error("Failed to fetch categories")
                 }

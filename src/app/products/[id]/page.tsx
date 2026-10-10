@@ -1,59 +1,54 @@
-import React from "react";
-import { notFound } from "next/navigation";
+import React from "react"
+import { notFound } from "next/navigation"
 
-const BASE_URL = "https://api.api-store.workers.dev/api/bazardor";
+const BASE_URL = "https://api.api-store.workers.dev/api/bazardor"
 type Market =
     {
-        market: string;
-        division: string;
+        market: string
+        division: string
         max: number
         min: number
     }
 
 type Product = {
-    id: string | number;
-    nameBn: string;
-    image: string;
-    category: string;
-    categoryNameBn: string;
-    today: number;
-    yesterday: number;
-    unit: string;
+    id: string | number
+    nameBn: string
+    image: string
+    category: string
+    categoryNameBn: string
+    today: number
+    yesterday: number
+    unit: string
     change: {
-        dir: string;
-        pct: number;
-    };
+        dir: string
+        pct: number
+    }
     markets: Market[]
-};
+}
 
 type Props = {
-    params: Promise<{ id: string }>;
-};
+    params: Promise<{ id: string }>
+}
 
 export default async function ProductDetails({ params }: Props) {
-    const { id } = await params;
+    const { id } = await params
 
     const response = await fetch(
         `${BASE_URL}/products/${id}`
-    );
+    )
 
     if (!response.ok) {
-        throw new Error("Failed to fetch products");
+        throw new Error("Failed to fetch products")
     }
-
-    const product: Product = await response.json();
-
-    const today = Number(product.today);
-
-    const yesterday = Number(product.yesterday);
-
-    const difference = today - yesterday;
-
+    const product: Product = await response.json()
+    const today = Number(product.today)
+    const yesterday = Number(product.yesterday)
+    const difference = today - yesterday
     const highestPrice = Math.max(
         ...product.markets.map((market) =>
             Number(market.max)
         )
-    );
+    )
 
     const averagePrice =
         product.markets.reduce(
@@ -61,13 +56,13 @@ export default async function ProductDetails({ params }: Props) {
                 total +
                 (Number(market.min) + Number(market.max)) / 2,
             0
-        ) / product.markets.length;
+        ) / product.markets.length
 
     return (
         <main className="min-h-screen px-4 py-6">
             <div className="mx-auto max-w-[1500px]">
                 <p className="mb-5 text-sm text-gray-600">
-                    হোম &gt; {product.categoryNameBn} &gt; {product.nameBn}
+                    হোম &gt {product.categoryNameBn} &gt {product.nameBn}
                 </p>
                 <section className="flex items-center justify-between gap-4 rounded-2xl border border-(--border) bg-[#fbfdfb] p-4 sm:p-5">
                     <div className="flex min-w-0 items-center gap-3 sm:gap-4">
@@ -229,5 +224,5 @@ export default async function ProductDetails({ params }: Props) {
                 </section>
             </div>
         </main>
-    );
+    )
 }
