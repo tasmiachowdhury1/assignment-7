@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-
+import AuthMenu from "@/app/components/AuthMenu";
 type Category = {
     id: string
     slug: string
@@ -27,7 +27,7 @@ export default function Navbar() {
         async function fetchCategories() {
             try {
                 const response = await fetch(
-                    "https://api.abcz.workers.dev/api/bazardor/categories")
+                    " https://openapi.programming-hero.com/api/bazardor/categories")
                 if (!response.ok) {
                     throw new Error("Failed to fetch categories")
                 }
@@ -56,21 +56,7 @@ export default function Navbar() {
                             </p>
                         </div>
                     </Link>
-                    <div className="hidden items-center gap-3 sm:flex">
-                        <Link
-                            href="/signin"
-                            className="rounded-lg px-4 py-2 text-sm font-medium text-(--primary) hover:bg-(--primary-lighter)"
-                        >
-                            সাইন ইন
-                        </Link>
-
-                        <Link
-                            href="/signup"
-                            className="rounded-lg bg-(--primary) px-4 py-2 text-sm font-medium text-white hover:bg-(--primary-dark)"
-                        >
-                            সাইন আপ
-                        </Link>
-                    </div>
+                    <AuthMenu />
                     <button
                         type="button"
                         onClick={() => setMenuOpen(!menuOpen)}
@@ -124,23 +110,7 @@ export default function Navbar() {
                                 </Link>
                             ))}
                         </nav>
-                        <div className="mt-4 flex gap-2 border-t border-(--border) pt-4">
-                            <Link
-                                href="/signin"
-                                onClick={() => setMenuOpen(false)}
-                                className="flex-1 rounded-lg border border-(--border) py-2 text-center text-sm"
-                            >
-                                সাইন ইন
-                            </Link>
-
-                            <Link
-                                href="/signup"
-                                onClick={() => setMenuOpen(false)}
-                                className="flex-1 rounded-lg bg-(--primary) py-2 text-center text-sm text-white"
-                            >
-                                সাইন আপ
-                            </Link>
-                        </div>
+                        <AuthMenu />
                     </div>
                 )}
             </div>

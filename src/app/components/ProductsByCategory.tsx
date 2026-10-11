@@ -30,7 +30,7 @@ type Props = {
     slug: string
 }
 const BASE_URL =
-    "https://api.api-store.workers.dev/api/bazardor"
+    "https://openapi.programming-hero.com/api/bazardor"
 
 type SortOption = "default" | "price-low" | "price-high" | "name"
 
