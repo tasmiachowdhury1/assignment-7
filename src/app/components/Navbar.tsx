@@ -9,7 +9,20 @@ type Category = {
     nameBn: string
     icon: string
 }
-
+function Skeleton() {
+    return (
+        <div className="animate-pulse">
+            <div className="flex items-center gap-2 pb-3">
+                {Array.from({ length: 8 }).map((_, index) => (
+                    <div
+                        key={index}
+                        className="h-9 w-20 shrink-0 rounded-full bg-(--muted)"
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [categories, setCategories] = useState<Category[]>([])
@@ -27,7 +40,7 @@ export default function Navbar() {
         async function fetchCategories() {
             try {
                 const response = await fetch(
-                    " https://openapi.programming-hero.com/api/bazardor/categories")
+                    "https://openapi.programming-hero.com/api/bazardor/categories")
                 if (!response.ok) {
                     throw new Error("Failed to fetch categories")
                 }
@@ -68,23 +81,20 @@ export default function Navbar() {
                 </div>
                 <div className="border-t border-gray-300">
                     <nav className="hidden items-center gap-2 pb-3 sm:flex">
-                        {categories.map((category) => (
-                            <Link
-                                key={category.id}
-                                href={
-                                    category.slug
-                                        ? `/category/${category.slug}`
-                                        : "/"
-                                }
-                                className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-(--muted) hover:bg-(--primary-lighter) hover:text-(--primary)"
-                            >
-                                <span>
-                                    {category.icon}
-                                </span>
-
-                                <span>{category.nameBn}</span>
-                            </Link>
-                        ))}
+                        {categories.length === 0 ? (
+                            <Skeleton />
+                        ) : (
+                            categories.map((category) => (
+                                <Link
+                                    key={category.id}
+                                    href={category.slug ? `/category/${category.slug}` : "/"}
+                                    className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-(--muted) hover:bg-(--primary-lighter) hover:text-(--primary)"
+                                >
+                                    <span>{category.icon}</span>
+                                    <span>{category.nameBn}</span>
+                                </Link>
+                            ))
+                        )}
                     </nav>
                 </div>
 

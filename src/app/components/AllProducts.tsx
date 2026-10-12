@@ -18,7 +18,28 @@ type Product = {
     };
 };
 
+function Skeleton() {
+    return (
+        <div className="animate-pulse rounded-xl border border-(--border) bg-white px-4 py-8">
+            <div className="flex items-center gap-3">
+                <div className="h-12 w-12 shrink-0 rounded-xl bg-(--muted)" />
+                <div className="min-w-0 flex-1 space-y-2">
+                    <div className="h-4 w-3/4 rounded bg-(--muted)" />
+                    <div className="h-3 w-1/2 rounded bg-(--muted)" />
+                </div>
+            </div>
 
+            <div className="mt-3 flex items-end justify-between gap-2">
+                <div className="flex flex-col gap-2">
+                    <div className="h-3 w-20 rounded bg-(--muted)" />
+                    <div className="h-5 w-28 rounded bg-(--muted)" />
+                </div>
+
+                <div className="h-7 w-16 rounded-full bg-(--muted)" />
+            </div>
+        </div>
+    );
+}
 export default function AllProducts() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -66,65 +87,75 @@ export default function AllProducts() {
                     {products.length} টি পণ্য
                 </span>
             </div>
-
-            {products.length === 0 ? (
-                <p className="py-6 text-gray-500">
-                    কোনো পণ্য পাওয়া যায়নি।
-                </p>
-            ) : (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {products.map((product) => (
-                        <Link key={product.id} href={`/products/${product.id}`} className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer">
-                            <div className="flex items-center gap-3">
-                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
-                                    {product.image}
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                    <h3 className="text-sm font-bold">
-                                        {product.nameBn}
-                                    </h3>
-                                    <p className="text-xs text-gray-700">
-                                        প্রতি {product.unit}
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div className="mt-3 flex items-end justify-between gap-2">
-                                <div className='flex flex-col gap-1'>
-                                    <p className="text-sm text-gray-500">
-                                        আজকের দাম
-                                    </p>
-                                    <p className="text-[15px] font-bold text-gray-900">
-                                        ৳{Number(product.today).toLocaleString("bn-BD")}{" "}
-                                        <span className="text-sm font-normal">
-                                            টাকা
-                                        </span>
-                                    </p>
-                                </div>
-
-                                {product.change?.dir === "up" && (
-                                    <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold text-(--price-hike)">
-                                        ▲ {Number(product.change.pct).toLocaleString("bn-BD")}%
-                                    </span>
-                                )}
-
-                                {product.change?.dir === "down" && (
-                                    <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold text-(--primary-light)">
-                                        ▼ {Number(product.change.pct).toLocaleString("bn-BD")}%
-                                    </span>
-                                )}
-
-                                {product.change?.dir !== "up" &&
-                                    product.change?.dir !== "down" && (
-                                        <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold  text-gray-500">
-                                            — ০.০%
-                                        </span>
-                                    )}
-                            </div>
-                        </Link>
+            {loading ? (
+                <div
+                    className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+                    aria-label="পণ্য লোড হচ্ছে"
+                    aria-busy="true"
+                >
+                    {Array.from({ length: 6 }).map((_, index) => (
+                        <Skeleton key={index} />
                     ))}
                 </div>
-            )}
+            ) :
+                products.length === 0 ? (
+                    <p className="py-6 text-gray-500">
+                        কোনো পণ্য পাওয়া যায়নি।
+                    </p>
+                ) : (
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {products.map((product) => (
+                            <Link key={product.id} href={`/products/${product.id}`} className="rounded-xl border border-(--border) bg-white px-4 py-8 transition-shadow hover:shadow-md cursor-pointer">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-2xl">
+                                        {product.image}
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                        <h3 className="text-sm font-bold">
+                                            {product.nameBn}
+                                        </h3>
+                                        <p className="text-xs text-gray-700">
+                                            প্রতি {product.unit}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="mt-3 flex items-end justify-between gap-2">
+                                    <div className='flex flex-col gap-1'>
+                                        <p className="text-sm text-gray-500">
+                                            আজকের দাম
+                                        </p>
+                                        <p className="text-[15px] font-bold text-gray-900">
+                                            ৳{Number(product.today).toLocaleString("bn-BD")}{" "}
+                                            <span className="text-sm font-normal">
+                                                টাকা
+                                            </span>
+                                        </p>
+                                    </div>
+
+                                    {product.change?.dir === "up" && (
+                                        <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold text-(--price-hike)">
+                                            ▲ {Number(product.change.pct).toLocaleString("bn-BD")}%
+                                        </span>
+                                    )}
+
+                                    {product.change?.dir === "down" && (
+                                        <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold text-(--primary-light)">
+                                            ▼ {Number(product.change.pct).toLocaleString("bn-BD")}%
+                                        </span>
+                                    )}
+
+                                    {product.change?.dir !== "up" &&
+                                        product.change?.dir !== "down" && (
+                                            <span className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-sm font-semibold  text-gray-500">
+                                                — ০.০%
+                                            </span>
+                                        )}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                )}
         </section>
     );
 }

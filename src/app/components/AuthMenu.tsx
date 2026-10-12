@@ -12,15 +12,12 @@ export default function AuthMenu() {
     const [signingOut, setSigningOut] = useState(false);
     async function handleSignOut() {
         setSigningOut(true);
-
         try {
             const { error } = await authClient.signOut();
-
             if (error) {
                 alert(error.message || "সাইন আউট করা যায়নি।");
                 return;
             }
-
             setOpen(false);
             router.replace("/");
             router.refresh();
@@ -32,8 +29,21 @@ export default function AuthMenu() {
         }
     }
 
+
     if (isPending) {
-        return <div className="h-10 w-24" aria-label="Loading account" />;
+        return (
+            <div
+                className="flex animate-pulse items-center gap-3"
+                aria-label="অ্যাকাউন্ট লোড হচ্ছে"
+                aria-busy="true"
+            >
+                <div className="h-9 w-9 rounded-full bg-(--muted)" />
+
+                <div className="h-4 w-16 rounded bg-(--muted)" />
+
+                <div className="h-9 w-9 rounded-lg bg-(--muted)" />
+            </div>
+        );
     }
     if (!session) {
         return (

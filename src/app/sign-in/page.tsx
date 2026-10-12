@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, authClient } from "@/app/lib/auth-client";
+import {
+    Eye,
+    EyeOff,
+} from 'lucide-react';
 
 export default function SignInPage() {
     const router = useRouter();
@@ -14,6 +18,7 @@ export default function SignInPage() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [socialLoading, setSocialLoading] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -96,22 +101,42 @@ export default function SignInPage() {
                     />
                 </div>
 
-                <div>
-                    <label htmlFor="password" className="mb-1 block text-sm font-medium">
+                <div className="relative">
+                    <label
+                        htmlFor="password"
+                        className="mb-2 block text-sm font-semibold text-(--muted)"
+                    >
                         পাসওয়ার্ড
                     </label>
+
                     <input
                         id="password"
-                        type="password"
-                        autoComplete="current-password"
-                        required
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full rounded-lg border border-(--muted) px-4 py-3 outline-none"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        autoComplete="new-password"
                         placeholder="কমপক্ষে ৮ অক্ষর"
+                        minLength={8}
+                        required
+                        className={"w-full rounded-lg border border-(--muted) px-4 py-3 outline-none pr-12"}
                     />
-                </div>
 
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        aria-label={
+                            showPassword
+                                ? "পাসওয়ার্ড লুকান"
+                                : "পাসওয়ার্ড দেখান"
+                        }
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-(--primary-light)"
+                    >
+                        {showPassword ? (
+                            <EyeOff size={19} />
+                        ) : (
+                            <Eye size={19} />
+                        )}
+                    </button>
+                </div>
                 <button
                     type="submit"
                     disabled={loading}

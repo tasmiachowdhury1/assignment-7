@@ -3,6 +3,40 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient, useSession } from "@/app/lib/auth-client";
+function Skeleton() {
+    return (
+        <main className="min-h-[70vh] animate-pulse bg-[#f0f5f0] px-4 py-12">
+            <div className="mx-auto max-w-2xl">
+                <div className="mb-6 space-y-3">
+                    <div className="h-8 w-48 rounded bg-(--muted)" />
+                    <div className="h-4 w-64 max-w-full rounded bg-(--muted)" />
+                </div>
+
+                <section className="mb-5 flex items-center gap-4 rounded-2xl border border-(--border) bg-white p-5">
+                    <div className="h-16 w-16 shrink-0 rounded-2xl bg-(--muted)" />
+
+                    <div className="flex-1 space-y-2">
+                        <div className="h-5 w-36 rounded bg-(--muted)" />
+                        <div className="h-4 w-48 max-w-full rounded bg-(--muted)" />
+                    </div>
+
+                    <div className="h-10 w-24 rounded-lg bg-(--muted)" />
+                </section>
+
+                <section className="space-y-5 rounded-2xl border border-(--border) bg-white p-6">
+                    <div className="h-6 w-20 rounded bg-(--muted)" />
+
+                    <div className="space-y-2">
+                        <div className="h-4 w-12 rounded bg-(--muted)" />
+                        <div className="h-12 w-full rounded-lg bg-(--muted)" />
+                    </div>
+
+                    <div className="h-12 w-full rounded-lg bg-(--muted)" />
+                </section>
+            </div>
+        </main>
+    );
+}
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -64,11 +98,7 @@ export default function ProfilePage() {
     }
 
     if (isPending) {
-        return (
-            <main className="min-h-[50vh] p-10 text-center text-gray-600">
-                প্রোফাইল লোড হচ্ছে...
-            </main>
-        );
+        return <Skeleton />;
     }
 
     if (error) {

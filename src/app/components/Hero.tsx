@@ -4,6 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react"
 
+function Skeleton() {
+    return (
+        <section className="mt-10 mx-auto max-w-[1500px] animate-pulse rounded-2xl bg-white">
+            <div className="grid grid-cols-1 items-center gap-12 px-6 py-8 sm:px-8 md:grid-cols-2">
+                <div>
+                    <div className="h-10 w-40 rounded-full bg-(--muted)" />
+                    <div className="mt-4 h-8 w-full max-w-md rounded bg-(--muted)" />
+                    <div className="mt-3 h-4 w-full rounded bg-(--muted)" />
+                    <div className="mt-2 h-4 w-5/6 rounded bg-(--muted)" />
+                    <div className="mt-2 h-4 w-4/6 rounded bg-(--muted)" />
+                    <div className="mt-7 h-12 w-40 rounded-2xl bg-(--muted)" />
+                </div>
+
+                <div className="h-64 w-full rounded-xl bg-(--muted) sm:h-95" />
+            </div>
+        </section>
+    );
+}
+
 const Hero = () => {
     const [todaysDate, setTodaysDate] = useState("")
     useEffect(() => {
@@ -15,6 +34,9 @@ const Hero = () => {
             }).format(new Date())
         )
     }, [])
+    if (!todaysDate) {
+        return <Skeleton />;
+    }
     return (
 
         <section className="mt-10 max-w-[1500px] mx-auto bg-white rounded-2xl">

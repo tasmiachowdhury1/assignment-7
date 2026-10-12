@@ -10,12 +10,17 @@ if (!mongoUrl) {
 
 const client = new MongoClient(mongoUrl);
 const db = client.db("assignment-7");
-
 export const auth = betterAuth({
     database: mongodbAdapter(db, { client }),
 
     emailAndPassword: {
         enabled: true,
+    },
+    account: {
+        accountLinking: {
+            enabled: true,
+            trustedProviders: ["github", "google"],
+        },
     },
 
     socialProviders: {

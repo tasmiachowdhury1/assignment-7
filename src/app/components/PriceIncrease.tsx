@@ -14,6 +14,28 @@ type Product = {
         pct: number
     }
 }
+function Skeleton() {
+    return (
+        <div className="animate-pulse rounded-xl border border-(--border) bg-white px-4 py-8">
+            <div className="flex items-center gap-3">
+                <div className="h-12 w-12 shrink-0 rounded-xl bg-(--muted)" />
+                <div className="min-w-0 flex-1 space-y-2">
+                    <div className="h-4 w-3/4 rounded bg-(--muted)" />
+                    <div className="h-3 w-1/2 rounded bg-(--muted)" />
+                </div>
+            </div>
+
+            <div className="mt-3 flex items-end justify-between gap-2">
+                <div className="flex flex-col gap-2">
+                    <div className="h-3 w-20 rounded bg-(--muted)" />
+                    <div className="h-5 w-28 rounded bg-(--muted)" />
+                </div>
+
+                <div className="h-7 w-16 rounded-full bg-(--muted)" />
+            </div>
+        </div>
+    );
+}
 export default function PriceIncreased() {
     const [products, setProducts] = useState<Product[]>([])
     const [loading, setLoading] = useState(true)
@@ -50,7 +72,23 @@ export default function PriceIncreased() {
         ).slice(0, 6)
 
     if (loading) {
-        return <p className="mt-10">পণ্য লোড হচ্ছে...</p>
+        return (
+            <section className="mt-10 mx-auto max-w-[1500px]">
+                <h2 className="mb-4 text-xl font-bold text-(--price-hike)">
+                    ▲ <span className="text-black">আজ দাম বেড়েছে</span>
+                </h2>
+
+                <div
+                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                    aria-label="পণ্য লোড হচ্ছে"
+                    aria-busy="true"
+                >
+                    {Array.from({ length: 6 }).map((_, index) => (
+                        <Skeleton key={index} />
+                    ))}
+                </div>
+            </section>
+        )
     }
 
     return (

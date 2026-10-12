@@ -11,7 +11,6 @@ import {
     EyeOff,
     CheckCircle2,
 } from "lucide-react";
-
 export default function SignUpPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -143,7 +142,7 @@ export default function SignUpPage() {
                         className="w-full rounded-lg border border-(--muted) px-4 py-3 outline-none"
                     />
                 </div>
-                <div>
+                <div className="relative">
                     <label
                         htmlFor="password"
                         className="mb-2 block text-sm font-semibold text-(--muted)"
@@ -179,7 +178,7 @@ export default function SignUpPage() {
                         )}
                     </button>
                 </div>
-                <div>
+                <div className="relative">
                     <label
                         htmlFor="confirmPassword"
                         className="mb-2 block text-sm font-semibold text-(--muted)"
@@ -210,7 +209,7 @@ export default function SignUpPage() {
                                 ? "পাসওয়ার্ড লুকান"
                                 : "পাসওয়ার্ড দেখান"
                         }
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-(--primary-light)"
+                        className="flex items-center justify-center absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400  hover:text-(--primary-light)"
                     >
                         {showConfirmPassword ? (
                             <EyeOff size={19} />
@@ -218,6 +217,7 @@ export default function SignUpPage() {
                             <Eye size={19} />
                         )}
                     </button>
+
                 </div>
                 {error && (
                     <div

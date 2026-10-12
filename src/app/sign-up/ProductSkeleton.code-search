@@ -1,0 +1,43 @@
+# Query: ProductSkeleton
+# ContextLines: 1
+
+7 results - 4 files
+
+src\app\components\AllProducts.tsx:
+  20  
+  21: function 
+  Skeleton() {
+  22      return (
+
+  96                      {Array.from({ length: 6 }).map((_, index) => (
+  97:                         <
+  Skeleton key={index} />
+  98                      ))}
+
+src\app\components\PriceDecreased.tsx:
+  16  }
+  17: function 
+  Skeleton() {
+  18      return (
+
+  86                      {Array.from({ length: 6 }).map((_, index) => (
+  87:                         <
+  Skeleton key={index} />
+  88                      ))}
+
+src\app\components\PriceIncrease.tsx:
+  16  }
+  17: function 
+  Skeleton() {
+  18      return (
+
+  86                      {Array.from({ length: 6 }).map((_, index) => (
+  87:                         <
+  Skeleton key={index} />
+  88                      ))}
+
+src\app\sign-up\page.tsx:
+  13  } from "lucide-react";
+  14: function 
+  Skeleton() {
+  15      return (
