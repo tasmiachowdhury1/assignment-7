@@ -24,7 +24,7 @@ export default function SignInPage() {
         e.preventDefault();
         setLoading(true);
         setErrorMessage("");
-
+        console.log(email, password)
         try {
             const { error } = await signIn.email({
                 email,
