@@ -11,6 +11,16 @@ if (!mongoUrl) {
 const client = new MongoClient(mongoUrl);
 const db = client.db("assignment-7");
 export const auth = betterAuth({
+
+    emailAndPassword: {
+        enabled: true,
+    },
+    account: {
+        accountLinking: {
+            enabled: true,
+            trustedProviders: ["github", "google"],
+        },
+    },
     socialProviders: {
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -19,15 +29,6 @@ export const auth = betterAuth({
         github: {
             clientId: process.env.GITHUB_CLIENT_ID as string,
             clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-        },
-    },
-    emailAndPassword: {
-        enabled: true,
-    },
-    account: {
-        accountLinking: {
-            enabled: true,
-            trustedProviders: ["github", "google"],
         },
     },
     database: mongodbAdapter(db, { client }),
