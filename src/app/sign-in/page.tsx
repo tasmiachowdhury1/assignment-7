@@ -117,6 +117,8 @@ export default function SignInPage() {
                         placeholder="কমপক্ষে ৮ অক্ষর"
                         minLength={8}
                         required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         className={"w-full rounded-lg border border-(--muted) px-4 py-3 outline-none pr-12"}
                     />
 
